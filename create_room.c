@@ -1,16 +1,15 @@
 #include <lem_in.h>
 
-t_room	*create_room(char *name, char type)
+t_room	*create_room(char *name, int x, int y, char type)
 {
 	t_room		*new;
 
-	new = NULL;
-	new = (t_room *)malloc(sizeof(t_room));
+	new = LIST_NEW(t_room);
 	new->name = name;
 	new->type = type;
-	new->available = 0;
-	new->list_tube = NULL;
-	if (type == 1 || type == 2)
+	new->y = y;
+	new->x = x;
+	if (type == ROOM_START || type == ROOM_END)
 		new->capacity = 1000; // define MAX or inf
 	else
 		new->capacity = 1;

@@ -7,10 +7,18 @@ LIBS_NAME = libft/libft.a
 
 SRC = main.c \
 	  create_room.c \
-	  free_room.c
+	  addtube_to_room.c \
+	  connect_room.c \
+	  show_room_prive.c \
+	  free_room.c \
+	  \
+	  list_new.c \
+	  list_push_front.c \
+	  list_push_back.c
 
 INC_DIR = includes/
-INC_FILES = lem_in.h
+INC_FILES = lem_in.h \
+			plist.h
 
 INC_DIR_OTHER = libft/includes/
 
