@@ -5,6 +5,7 @@ t_room	*create_room(char *name, int x, int y, char type)
 	t_room		*new;
 
 	new = LIST_NEW(t_room);
+	new->connection = NULL;
 	new->name = ft_strdup(name);
 	new->type = type;
 	new->y = y;

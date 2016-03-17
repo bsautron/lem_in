@@ -1,9 +1,13 @@
 #include <lem_in.h>
 
-void	show_room_prive(t_room *room)
+void	show_room_prive(t_anthill house, char *room_name)
 {
-	t_connection	*tmp;
+	t_room_list	*tmp;
+	t_room_htab *hroom;
+	t_room			*room;
 
+	hroom = HTAB_GET(house.htab, t_room_htab, room_name);
+	room = hroom->room;
 	ft_putstr("Name: [");
 	ft_putstr(room->name);
 	ft_putendl("]");
