@@ -13,7 +13,10 @@ int		main(void)
 	connect_room(house, "One", "Three");
 	connect_room(house, "One", "Zero");
 	connect_room(house, "Zero", "Three");
-
+	add_ant(&house, "Zero");
+	add_ant(&house, "Zero");
+	add_ant(&house, "Zero");
+	add_ant(&house, "Zero");
 	show_anthill(house);
 	return (0);
 }

@@ -13,12 +13,29 @@
 typedef struct s_room		t_room;
 typedef struct s_room_list t_room_list;
 typedef struct s_room_htab t_room_htab;
+typedef struct s_ant_list t_ant_list;
 
 typedef struct	s_anthill
 {
+	int						nb_ant;
+	t_ant_list		*ants;
 	t_room_list		*rooms;
 	t_htab				htab;
 }								t_anthill;
+
+typedef struct		s_ant
+{
+	int 		id;
+	int 		y;
+	int 		x;
+	int			type;
+}									t_ant;
+
+struct		s_ant_list
+{
+	void 				*next;
+	t_ant				ant;
+};
 
 struct		s_room
 {
@@ -26,6 +43,7 @@ struct		s_room
 	char			*name;
 	char			type;
 	int				capacity;
+	int				nb_ant;
 	int				available;
 	int				y;
 	int				x;
@@ -47,8 +65,12 @@ struct	s_room_htab
 t_anthill     init_anthill(void);
 void    			show_anthill(t_anthill house);
 
+t_ant     new_ant(int id, int y, int x, int type);
+int    add_ant(t_anthill *house, char *room);
+
 t_room		*create_room(char *name, int x, int y, char type);
 void		addtube_to_room(t_room *room, t_room *new);
+int     room_is_available(t_room *room);
 void		connect_room(t_anthill house, char *room1, char *room2);
 void	show_room_prive(t_anthill house, char *room_name);
 void		free_room(t_room *room);

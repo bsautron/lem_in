@@ -5,7 +5,7 @@ t_anthill     init_anthill(void)
 {
   t_anthill    new;
 
-  new.rooms = NULL;
+  ft_bzero(&new, sizeof(t_anthill));
   new.htab = HTAB_CREATE(100, &hash_pour_les_nuls);
   return (new);
 }

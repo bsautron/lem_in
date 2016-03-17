@@ -6,12 +6,16 @@ DEPENDENCIES = libft \
 SOURCES =	create_room.c \
 	  			addtube_to_room.c \
 					connect_room.c \
+					room_is_available.c \
 					show_room_prive.c \
 					free_room.c \
 					add_room.c \
 					\
 					init_anthill.c \
 					show_anthill.c \
+					\
+					new_ant.c \
+					add_ant.c \
 
 SOURCES_FOLDER = sources
 

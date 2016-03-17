@@ -25,6 +25,9 @@ void	show_room_prive(t_anthill house, char *room_name)
 	ft_putchar('\n');
 	ft_putstr("Available: ");
 	ft_putendl((room->available) ? "True" : "False");
+	ft_putstr("Nb ants: ");
+	ft_putnbr(room->nb_ant);
+	ft_putchar('\n');
 	ft_putstr("Connection:");
 	tmp = room->connection;
 	while (tmp)
