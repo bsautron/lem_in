@@ -1,11 +1,17 @@
 NAME = lem_in
 DEPENDENCIES = libft \
-								liblist
+								liblist \
+								libhash \
+								libhtab
 SOURCES =	create_room.c \
 	  			addtube_to_room.c \
 					connect_room.c \
 					show_room_prive.c \
 					free_room.c \
+					add_room.c \
+					\
+					init_anthill.c \
+					show_anthill.c \
 
 SOURCES_FOLDER = sources
 

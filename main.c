@@ -2,18 +2,18 @@
 
 int		main(void)
 {
-	t_room	*start;
-	t_room	*one;
-	t_room	*two;
-	t_room	*three;
+	t_anthill		house;
 
-	start = create_room(ft_strdup("Zero"), 1, 2, ROOM_START);
-	three = create_room(ft_strdup("Three"), 5, 4, ROOM_NORMAL);
-	two = create_room(ft_strdup("Two"), 5, 0, ROOM_NORMAL);
-	one = create_room(ft_strdup("One"), 9, 2, ROOM_END);
+	house = init_anthill();
+	add_room(&house, create_room("Zero", 1, 2, ROOM_START));
+	add_room(&house, create_room("Three", 5, 4, ROOM_NORMAL));
+	add_room(&house, create_room("Two", 5, 0, ROOM_NORMAL));
+	add_room(&house, create_room("One", 9, 2, ROOM_END));
 
-	connect_room(start, two);
-	show_room_prive(two);
-	show_room_prive(start);
+	show_anthill(house);
+
+	// connect_room(start, two);
+	// show_room_prive(two);
+	// show_room_prive(start);
 	return (0);
 }
