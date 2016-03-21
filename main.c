@@ -11,21 +11,26 @@ int		main(int argc, char const **argv)
 	parse_options(&args, argc, argv);
 	/* --- */
 	house = init_anthill();
-	add_room(&house, create_room("Zero", 1, 2, ROOM_START));
-	add_room(&house, create_room("Three", 5, 4, ROOM_NORMAL));
-	add_room(&house, create_room("Two", 5, 0, ROOM_NORMAL));
-	add_room(&house, create_room("One", 9, 2, ROOM_END));
-	connect_room(house, "One", "Two");
-	connect_room(house, "One", "Three");
-	connect_room(house, "One", "Zero");
-	connect_room(house, "Zero", "Three");
-	create_matrix(&house);
-	add_ant(&house, "Zero");
-	add_ant(&house, "Zero");
-	add_ant(&house, "Zero");
-	add_ant(&house, "Zero");
+	add_room(&house, create_room("r1", 0, 0, ROOM_START));
+	add_room(&house, create_room("r2", 0, 0, ROOM_NORMAL));
+	add_room(&house, create_room("r3", 0, 0, ROOM_NORMAL));
+	add_room(&house, create_room("r4", 0, 0, ROOM_NORMAL));
+	add_room(&house, create_room("r5", 0, 0, ROOM_NORMAL));
+	add_room(&house, create_room("r6", 0, 0, ROOM_NORMAL));
+	add_room(&house, create_room("r7", 0, 0, ROOM_END));
+	connect_room(house, "r1", "r2");
+	connect_room(house, "r1", "r4");
+	connect_room(house, "r1", "r3");
+	connect_room(house, "r2", "r4");
+	connect_room(house, "r3", "r4");
+	connect_room(house, "r4", "r5");
+	connect_room(house, "r4", "r6");
+	connect_room(house, "r5", "r7");
+	connect_room(house, "r6", "r7");
+	// add_ant(&house, "r1");
+	// add_ant(&house, "r1");
 	if (option_is_set(args, "-s--show"))
 		show_anthill(house);
-	find_all_road(&house);
+	dijkstra_it(&house);
 	return (0);
 }

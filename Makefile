@@ -18,9 +18,7 @@ SOURCES =	create_room.c \
 					new_ant.c \
 					add_ant.c \
 					\
-					find_all_road.c \
-					\
-					create_matrix.c \
+					dijkstra_it.c \
 					\
 					errors/no_more_start_room.c \
 					errors/no_more_end_room.c \

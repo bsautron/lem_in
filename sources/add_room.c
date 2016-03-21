@@ -6,6 +6,7 @@ void      add_hl_room(t_anthill *house, t_room *room)
   t_room_list   *new_l;
   t_room_htab   *new_h;
 
+  room->id = house->nb_rooms++;
   new_l = LIST_NEW(t_room_list);
   new_l->room = room;
   new_h = LIST_NEW(t_room_htab);

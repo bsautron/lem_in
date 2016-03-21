@@ -19,6 +19,7 @@ typedef struct s_ant_list t_ant_list;
 typedef struct	s_anthill
 {
 	int						nb_ant;
+	int						nb_rooms;
 	t_ant_list		*ants;
 	t_room				*start;
 	t_room				*end;
@@ -44,13 +45,15 @@ struct		s_ant_list
 struct		s_room
 {
 	t_room_list	*connection;
+	int				id;
 	char			*name;
 	char			type;
 	int				capacity;
-	int				nb_ant;
-	int				available;
 	int				y;
 	int				x;
+	int				available;
+	int				nb_ant;
+	int				visited;
 };
 
 struct	s_room_list
@@ -80,7 +83,7 @@ void	show_room_prive(t_anthill house, char *room_name);
 void		free_room(t_room *room);
 void      add_room(t_anthill *house, t_room *room);
 
-void 		find_all_road(t_anthill *house);
+void 		dijkstra_it(t_anthill *house);
 
 void    create_matrix(t_anthill *house);
 
