@@ -4,6 +4,7 @@
 # include <libft.h>
 # include <liblist.h>
 # include <libhtab.h>
+# include <libargs.h>
 # include <stdio.h>//
 
 # define ROOM_NORMAL		0
@@ -19,6 +20,8 @@ typedef struct	s_anthill
 {
 	int						nb_ant;
 	t_ant_list		*ants;
+	t_room				*start;
+	t_room				*end;
 	t_room_list		*rooms;
 	t_htab				htab;
 }								t_anthill;
@@ -75,6 +78,8 @@ void		connect_room(t_anthill house, char *room1, char *room2);
 void	show_room_prive(t_anthill house, char *room_name);
 void		free_room(t_room *room);
 void      add_room(t_anthill *house, t_room *room);
+
+void 		find_all_road(t_anthill *house);
 
 
 #endif

@@ -2,7 +2,8 @@ NAME = lem_in
 DEPENDENCIES = libft \
 								liblist \
 								libhash \
-								libhtab
+								libhtab \
+								libargs
 SOURCES =	create_room.c \
 	  			addtube_to_room.c \
 					connect_room.c \
@@ -16,8 +17,14 @@ SOURCES =	create_room.c \
 					\
 					new_ant.c \
 					add_ant.c \
+					\
+					find_all_road.c \
+					\
+					errors/no_more_start_room.c \
+					errors/no_more_end_room.c \
 
 SOURCES_FOLDER = sources
+OTHER_FOLDER = errors
 
 CC = clang
 CFLAGS = -Wextra -Wall -Werror
@@ -26,7 +33,8 @@ INCLUDES_FOLDER = includes
 OBJECTS_FOLDER = .objects
 MAIN = main.c
 MAIN_OBJECT = $(OBJECTS_FOLDER)/$(MAIN:.c=.o)
-INCLUDES = $(NAME).h
+INCLUDES = $(NAME).h \
+						errors.h
 
 SOURCES_DEPENDENCIES = $(foreach dep, $(DEPENDENCIES), libraries/$(dep)/$(dep).a)
 INCLUDES_LIBRARIES = $(foreach dep,$(DEPENDENCIES),-I libraries/$(dep)/includes)
@@ -45,9 +53,11 @@ makelib:
 
 rebuildlib:
 	$(REBUILD_LIBRARIES)
+	make re
 
 init:
 	mkdir -p $(OBJECTS_FOLDER)/$(SOURCES_FOLDER)
+	$(foreach folder, $(OTHER_FOLDER), mkdir -p $(OBJECTS_FOLDER)/$(SOURCES_FOLDER)/$(folder))
 
 $(NAME): $(MAIN_OBJECT) $(addprefix $(OBJECTS_FOLDER)/$(SOURCES_FOLDER)/, $(OBJECTS))
 	$(CC) $(CFLAGS) -o $@ $(MAIN_OBJECT) $(addprefix $(OBJECTS_FOLDER)/$(SOURCES_FOLDER)/, $(OBJECTS)) $(SOURCES_DEPENDENCIES)
