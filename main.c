@@ -19,6 +19,7 @@ int		main(int argc, char const **argv)
 	connect_room(house, "One", "Three");
 	connect_room(house, "One", "Zero");
 	connect_room(house, "Zero", "Three");
+	create_matrix(&house);
 	add_ant(&house, "Zero");
 	add_ant(&house, "Zero");
 	add_ant(&house, "Zero");

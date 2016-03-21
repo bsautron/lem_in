@@ -18,10 +18,10 @@ void	show_room_prive(t_anthill house, char *room_name)
 		ft_putendl("End");
 	else
 		ft_putendl("Normal");
-	ft_putstr("X: ");
-	ft_putnbr(room->x);
-	ft_putstr(" Y: ");
+	ft_putstr("Y: ");
 	ft_putnbr(room->y);
+	ft_putstr(" X: ");
+	ft_putnbr(room->x);
 	ft_putchar('\n');
 	ft_putstr("Available: ");
 	ft_putendl((room->available) ? "True" : "False");

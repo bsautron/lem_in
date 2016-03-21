@@ -1,6 +1,6 @@
 #include <lem_in.h>
 
-t_room	*create_room(char *name, int x, int y, char type)
+t_room	*create_room(char *name, int y, int x, char type)
 {
 	t_room		*new;
 

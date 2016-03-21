@@ -20,6 +20,8 @@ SOURCES =	create_room.c \
 					\
 					find_all_road.c \
 					\
+					create_matrix.c \
+					\
 					errors/no_more_start_room.c \
 					errors/no_more_end_room.c \
 

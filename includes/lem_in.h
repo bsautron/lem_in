@@ -24,6 +24,7 @@ typedef struct	s_anthill
 	t_room				*end;
 	t_room_list		*rooms;
 	t_htab				htab;
+	int 					**matrix_graph;
 }								t_anthill;
 
 typedef struct		s_ant
@@ -71,7 +72,7 @@ void    			show_anthill(t_anthill house);
 t_ant     new_ant(int id, int y, int x, int type);
 int    add_ant(t_anthill *house, char *room);
 
-t_room		*create_room(char *name, int x, int y, char type);
+t_room		*create_room(char *name, int y, int x, char type);
 void		addtube_to_room(t_room *room, t_room *new);
 int     room_is_available(t_room *room);
 void		connect_room(t_anthill house, char *room1, char *room2);
@@ -80,6 +81,8 @@ void		free_room(t_room *room);
 void      add_room(t_anthill *house, t_room *room);
 
 void 		find_all_road(t_anthill *house);
+
+void    create_matrix(t_anthill *house);
 
 
 #endif
