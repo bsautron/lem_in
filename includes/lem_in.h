@@ -110,7 +110,7 @@ void	show_room_prive(t_anthill house, char *room_name);
 void		free_room(t_room *room);
 void      add_room(t_anthill *house, t_room *room);
 
-void 		dijkstra_it(t_anthill *house);
+t_list_int 		**dijkstra_it(t_anthill *house);
 
 void 	init_dijsktra(t_anthill *house);
 void   print_matrix(t_anthill house);
