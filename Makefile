@@ -18,7 +18,9 @@ SOURCES =	create_room.c \
 					new_ant.c \
 					add_ant.c \
 					\
+					init_dijsktra.c \
 					dijkstra_it.c \
+					print_matrix.c \
 					\
 					errors/no_more_start_room.c \
 					errors/no_more_end_room.c \

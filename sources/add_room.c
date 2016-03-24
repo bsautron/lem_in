@@ -22,7 +22,6 @@ void      add_hl_room(t_anthill *house, t_room *room)
 
 void      add_room(t_anthill *house, t_room *room)
 {
-
   if (room->type == ROOM_START && house->start != 0)
     no_more_start_room();
   else if (room->type == ROOM_END && house->end != 0)
