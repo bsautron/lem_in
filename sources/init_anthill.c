@@ -7,5 +7,6 @@ t_anthill     init_anthill(void)
 
   ft_bzero(&new, sizeof(t_anthill));
   new.htab = HTAB_CREATE(100, &hash_pour_les_nuls);
+  new.roads = (t_roads *)malloc(sizeof(t_roads));
   return (new);
 }

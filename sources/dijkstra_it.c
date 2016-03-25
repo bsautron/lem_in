@@ -173,51 +173,53 @@ static int    remove_id_all_list(t_anthill *house, t_list_int **tab_list, int id
   return (rem);
 }
 
-static t_list_int   **get_road(t_anthill *house)
+static void   infos(t_anthill *house)
 {
-  t_list_int  **road;
-  int         nb_road;
+  printf("\n%s\n", "== Intermetiate ==");
+  print_list("rest", house->dijkstra->rest);
+  print_list("already", house->dijkstra->already);
+  print_tab_list("dist", house->dijkstra->dist);
+  print_tab_list("pred", house->dijkstra->pred);
+  printf("%s\n", "== === ==");
+}
+
+static void   get_road(t_anthill *house)
+{
   int         id;
   int         x;
   int         i;
   int         i_room;
-  int         nb_step;
 
-  nb_road = LIST_COUNT(house->dijkstra->pred[house->nb_rooms - 1]);
-  road = (t_list_int **)malloc(sizeof(t_list_int *) * (nb_road + 1));
-  ft_bzero(road, sizeof(t_list_int *) * nb_road);
-  road[nb_road] = NULL;
+  house->roads->nb_road = LIST_COUNT(house->dijkstra->pred[house->nb_rooms - 1]);
+  house->roads->road = (t_list_int **)malloc(sizeof(t_list_int *) * (house->roads->nb_road + 1));
+  house->roads->nb_step = (int *)malloc(sizeof(int *) * house->roads->nb_road);
+  ft_bzero(house->roads->road, sizeof(t_list_int *) * house->roads->nb_road);
+  house->roads->road[house->roads->nb_road] = NULL;
   i_room = 0;
-  while (i_room < nb_road)
+  while (i_room < house->roads->nb_road)
   {
     printf("i_room: %d\n", i_room);
     x = house->end->id;
-    push_id(&road[i_room], x);
-    nb_step = house->dijkstra->dist[house->nb_rooms - 1]->nb;
-    printf("nb_step = %d\n", nb_step);
+    push_id(&house->roads->road[i_room], x);
+    house->roads->nb_step[i_room] = house->dijkstra->dist[house->nb_rooms - 1]->nb;
+    printf("nb_step = %d\n", house->roads->nb_step[i_room]);
     remove_id(&house->dijkstra->dist[x], house->dijkstra->dist[x]->nb);
     i = 0;
-    while (i < nb_step)
+    while (i < house->roads->nb_step[i_room])
     {
       id = house->dijkstra->pred[x]->nb;
       printf("x = %d, id = %d\n", x, id);
-      if (remove_id_all_list(house, house->dijkstra->pred, id))
-        push_id(&road[i_room], id);
+      remove_id_all_list(house, house->dijkstra->pred, id);
+      push_id(&house->roads->road[i_room], id);
       x = id;
       i++;
     }
-    printf("\n%s\n", "== Intermetiate ==");
-    print_list("rest", house->dijkstra->rest);
-    print_list("already", house->dijkstra->already);
-    print_tab_list("dist", house->dijkstra->dist);
-    print_tab_list("pred", house->dijkstra->pred);
-    printf("%s\n", "== === ==");
+    infos(house);
     i_room++;
   }
-  return (road);
 }
 
-t_list_int    **dijkstra_it(t_anthill *house)
+void    dijkstra_it(t_anthill *house)
 {
   int     x;
 
@@ -226,5 +228,6 @@ t_list_int    **dijkstra_it(t_anthill *house)
   fill_it(house, x);
   while (house->dijkstra->already != NULL && (x = find_min(house)) != -1)
     fill_it(house, x);
-  return (get_road(house));
+  infos(house);
+  get_road(house);
 }

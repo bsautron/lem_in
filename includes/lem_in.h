@@ -17,6 +17,7 @@ typedef struct s_room_htab t_room_htab;
 typedef struct s_ant_list t_ant_list;
 typedef struct s_possible_road t_possible_road;
 typedef struct s_dijsktra t_dijsktra;
+typedef struct s_roads t_roads;
 
 typedef struct	s_anthill
 {
@@ -30,6 +31,7 @@ typedef struct	s_anthill
 	t_possible_road	**possible;
 
 	t_dijsktra		*dijkstra;
+	t_roads 			*roads;
 }								t_anthill;
 
 typedef struct		s_ant
@@ -86,6 +88,13 @@ typedef struct	s_list_int
 	int		nb;
 }								t_list_int;
 
+struct s_roads
+{
+	int						nb_road;
+	t_list_int		**road;
+	int						*nb_step;
+};
+
 struct	s_dijsktra
 {
 	int						**adjacent_matrix;
@@ -94,6 +103,7 @@ struct	s_dijsktra
 	t_list_int    *rest;
 	t_list_int    **pred;
 	t_list_int    **dist;
+	t_list_int		**road;
 };
 
 t_anthill     init_anthill(void);
@@ -110,7 +120,7 @@ void	show_room_prive(t_anthill house, char *room_name);
 void		free_room(t_room *room);
 void      add_room(t_anthill *house, t_room *room);
 
-t_list_int 		**dijkstra_it(t_anthill *house);
+void 		dijkstra_it(t_anthill *house);
 
 void 	init_dijsktra(t_anthill *house);
 void   print_matrix(t_anthill house);

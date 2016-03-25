@@ -17,7 +17,7 @@ int		main(int argc, char const **argv)
 	add_room(&house, create_room("r3", 0, 0, ROOM_NORMAL));
 	add_room(&house, create_room("r4", 0, 0, ROOM_NORMAL));
 	add_room(&house, create_room("r5", 0, 0, ROOM_NORMAL));
-	add_room(&house, create_room("r6", 0, 0, 	ROOM_NORMAL));
+	add_room(&house, create_room("r6", 0, 0, ROOM_NORMAL));
 	add_room(&house, create_room("r7", 0, 0, ROOM_NORMAL));
 	add_room(&house, create_room("r8", 0, 0, ROOM_END));
 	init_dijsktra(&house);
@@ -38,16 +38,17 @@ int		main(int argc, char const **argv)
 	// add_ant(&house, "r1");
 	if (option_is_set(args, "-s--show"))
 		show_anthill(house);
-	t_list_int	**road = dijkstra_it(&house);
+
+	dijkstra_it(&house);
 	int					i_r;
 
 	i_r = 0;
-	while (road[i_r])
+	while (house.roads->road[i_r])
 	{
-		while (road[i_r])
+		while (house.roads->road[i_r])
 		{
-			printf("%d ", road[i_r]->nb);
-			road[i_r] = road[i_r]->next;
+			printf("%d ", house.roads->road[i_r]->nb);
+			house.roads->road[i_r] = house.roads->road[i_r]->next;
 		}
 		printf("%s\n", "");
 		i_r++;
