@@ -34,26 +34,28 @@ int		main(int argc, char const **argv)
 	connect_room(&house, "r7", "r8");
 	print_matrix(house);
 	house.nb_ants = 25;
-	// print_matrix(house);
 	// add_ant(&house, "r1");
 	// add_ant(&house, "r1");
 	if (option_is_set(args, "-s--show"))
 		show_anthill(house);
 
 	dijkstra_it(&house);
-	
+
 	int					i_r;
+	int					i;
 
 	i_r = 0;
 	while (house.roads->road[i_r])
 	{
-		while (house.roads->road[i_r])
+		i = 0;
+		while (i < house.roads->nb_steps[i_r])
 		{
-			printf("%d ", house.roads->road[i_r]->nb);
-			house.roads->road[i_r] = house.roads->road[i_r]->next;
+			printf("%d ", house.roads->tab_roads[i_r][i]);
+			i++;
 		}
 		printf("%s\n", "");
 		i_r++;
 	}
+	move_ants(&house);
 	return (0);
 }

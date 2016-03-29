@@ -1,40 +1,41 @@
 NAME = lem_in
 DEPENDENCIES = libft \
-								liblist \
-								libhash \
-								libhtab \
-								libargs
-SOURCES =	create_room.c \
-	  			addtube_to_room.c \
-					connect_room.c \
-					room_is_available.c \
-					show_room_prive.c \
-					free_room.c \
-					add_room.c \
-					\
-					init_anthill.c \
-					show_anthill.c \
-					\
-					new_ant.c \
-					add_ant.c \
-					\
-					init_dijsktra.c \
-					dijkstra_it.c \
-					print_matrix.c \
-					get_roads.c \
-					\
-					helpers/find_min_list_int.c \
-					helpers/print_list.c \
-					helpers/print_tab_list.c \
-					helpers/push_id.c \
-					helpers/remove_id.c \
-					\
-					errors/no_more_start_room.c \
-					errors/no_more_end_room.c \
+				liblist \
+				libhash \
+				libhtab \
+				libargs
+SOURCES = create_room.c \
+			addtube_to_room.c \
+			connect_room.c \
+			room_is_available.c \
+			show_room_prive.c \
+			free_room.c \
+			add_room.c \
+			\
+			init_anthill.c \
+			show_anthill.c \
+			\
+			new_ant.c \
+			add_ant.c \
+			\
+			init_dijsktra.c \
+			dijkstra_it.c \
+			print_matrix.c \
+			get_roads.c \
+			move_ants.c \
+			\
+			helpers/find_min_list_int.c \
+			helpers/print_list.c \
+			helpers/print_tab_list.c \
+			helpers/push_id.c \
+			helpers/remove_id.c \
+			\
+			errors/no_more_start_room.c \
+			errors/no_more_end_room.c \
 
 SOURCES_FOLDER = sources
 OTHER_FOLDER = errors \
-								helpers
+				helpers
 
 CC = clang
 CFLAGS = -Wextra -Wall -Werror
@@ -44,7 +45,7 @@ OBJECTS_FOLDER = .objects
 MAIN = main.c
 MAIN_OBJECT = $(OBJECTS_FOLDER)/$(MAIN:.c=.o)
 INCLUDES = $(NAME).h \
-						errors.h
+			errors.h
 
 SOURCES_DEPENDENCIES = $(foreach dep, $(DEPENDENCIES), libraries/$(dep)/$(dep).a)
 INCLUDES_LIBRARIES = $(foreach dep,$(DEPENDENCIES),-I libraries/$(dep)/includes)
@@ -67,7 +68,7 @@ rebuildlib:
 
 init:
 	mkdir -p $(OBJECTS_FOLDER)/$(SOURCES_FOLDER)
-	$(foreach folder, $(OTHER_FOLDER), mkdir -p $(OBJECTS_FOLDER)/$(SOURCES_FOLDER)/$(folder))
+	$(foreach folder, $(OTHER_FOLDER), mkdir -p $(OBJECTS_FOLDER)/$(SOURCES_FOLDER)/$(folder);)
 
 $(NAME): $(MAIN_OBJECT) $(addprefix $(OBJECTS_FOLDER)/$(SOURCES_FOLDER)/, $(OBJECTS))
 	$(CC) $(CFLAGS) -o $@ $(MAIN_OBJECT) $(addprefix $(OBJECTS_FOLDER)/$(SOURCES_FOLDER)/, $(OBJECTS)) $(SOURCES_DEPENDENCIES)

@@ -23,6 +23,7 @@ typedef struct	s_anthill
 {
 	int						nb_ants;
 	int						nb_rooms;
+	int						nb_ants_arrived;
 	t_ant_list		*ants;
 	t_room				*start;
 	t_room				*end;
@@ -94,6 +95,7 @@ struct s_roads
 	t_list_int		**road;
 	int						*nb_steps;
 	int						*nb_ants;
+	int						**tab_roads;
 };
 
 struct	s_dijsktra
@@ -127,6 +129,7 @@ void 	init_dijsktra(t_anthill *house);
 void   print_matrix(t_anthill house);
 
 void   get_roads(t_anthill *house);
+void 	move_ants(t_anthill *house);
 
 int  find_min_list_int(t_list_int *list);
 void print_list(char *name, t_list_int *list);
