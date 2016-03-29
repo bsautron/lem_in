@@ -21,12 +21,20 @@ SOURCES =	create_room.c \
 					init_dijsktra.c \
 					dijkstra_it.c \
 					print_matrix.c \
+					get_roads.c \
+					\
+					helpers/find_min_list_int.c \
+					helpers/print_list.c \
+					helpers/print_tab_list.c \
+					helpers/push_id.c \
+					helpers/remove_id.c \
 					\
 					errors/no_more_start_room.c \
 					errors/no_more_end_room.c \
 
 SOURCES_FOLDER = sources
-OTHER_FOLDER = errors
+OTHER_FOLDER = errors \
+								helpers
 
 CC = clang
 CFLAGS = -Wextra -Wall -Werror

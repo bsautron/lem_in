@@ -125,6 +125,12 @@ void 		dijkstra_it(t_anthill *house);
 void 	init_dijsktra(t_anthill *house);
 void   print_matrix(t_anthill house);
 
+void   get_roads(t_anthill *house);
 
+int  find_min_list_int(t_list_int *list);
+void print_list(char *name, t_list_int *list);
+void print_tab_list(char *name, t_list_int **tab);
+void push_id(t_list_int **list, int id);
+int remove_id(t_list_int **list, int id);
 
 #endif

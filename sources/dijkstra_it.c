@@ -1,96 +1,9 @@
 #include <lem_in.h>
 
-static void print_list(char *name, t_list_int *list)
-{
-  t_list_int    *tmp;
-
-  tmp = list;
-  printf("%s: ", name);
-  while (tmp)
-  {
-    printf("%d ", tmp->nb);
-    tmp = tmp->next;
-  }
-  printf("%s\n", "");
-}
-
-static void print_tab_list(char *name, t_list_int **tab)
-{
-  int     i;
-  t_list_int    *tmp;
-
-  i = 0;
-  printf("%s: ", name);
-  while (tab[i])
-  {
-    tmp = tab[i];
-    while (tmp)
-    {
-      if (tmp->nb == -1)
-        printf("%s", "-");
-      else
-        printf("%d", tmp->nb);
-      tmp = tmp->next;
-      if (tmp)
-        printf(",");
-    }
-    printf(" ");
-    i++;
-  }
-  printf("%s\n", "");
-}
-
-static int remove_id(t_list_int **list, int id)
-{
-  t_list_int    *tmp;
-  t_list_int    *prev;
-
-  tmp = *list;
-  if (tmp->nb == id)
-    *list = tmp->next;
-  prev = tmp;
-  while (tmp)
-  {
-    if (tmp->nb == id)
-    {
-      prev->next = tmp->next;
-      return (1);
-    }
-    prev = tmp;
-    tmp = tmp->next;
-  }
-  return (0);
-}
-
-static void push_id(t_list_int **list, int id)
-{
-  t_list_int    *new;
-
-  new = LIST_NEW(t_list_int);
-  new->nb = id;
-  LIST_PUSH_FRONT(list, new);
-}
-
 static void push_pop_id(t_anthill *house, int id)
 {
   if (remove_id(&house->dijkstra->rest, id))
     push_id(&house->dijkstra->already, id);
-}
-
-static int  find_min_list_int(t_list_int *list)
-{
-  t_list_int    *tmp;
-  int           min;
-
-  tmp = list;
-  min = tmp->nb;
-  while (tmp)
-  {
-    if (tmp->nb < min)
-      min = tmp->nb;
-    tmp = tmp->next;
-  }
-  return (min);
 }
 
 static void fill_it(t_anthill *house, int id)
@@ -143,12 +56,10 @@ static int  find_min(t_anthill *house)
   {
     if (house->dijkstra->tab_rooms[tmp->nb]->type != ROOM_END)
     {
-      if (house->dijkstra->dist[tmp->nb]->nb != -1 && min == -1)
-      {
-        min = house->dijkstra->dist[tmp->nb]->nb;
-        ret = tmp->nb;
-      }
-      else if (house->dijkstra->dist[tmp->nb]->nb != -1 && house->dijkstra->dist[tmp->nb]->nb < min)
+      if ((house->dijkstra->dist[tmp->nb]->nb != -1
+        && min == -1)
+        || (house->dijkstra->dist[tmp->nb]->nb != -1
+        && house->dijkstra->dist[tmp->nb]->nb < min))
       {
         min = house->dijkstra->dist[tmp->nb]->nb;
         ret = tmp->nb;
@@ -157,66 +68,6 @@ static int  find_min(t_anthill *house)
     tmp = tmp->next;
   }
   return (ret);
-}
-
-static int    remove_id_all_list(t_anthill *house, t_list_int **tab_list, int id)
-{
-  int   rem;
-
-  rem = 0;
-  while (*tab_list)
-  {
-    if (house->dijkstra->tab_rooms[id]->type != ROOM_START && remove_id(&(*tab_list), id))
-      rem = 1;
-    tab_list++;
-  }
-  return (rem);
-}
-
-static void   infos(t_anthill *house)
-{
-  printf("\n%s\n", "== Intermetiate ==");
-  print_list("rest", house->dijkstra->rest);
-  print_list("already", house->dijkstra->already);
-  print_tab_list("dist", house->dijkstra->dist);
-  print_tab_list("pred", house->dijkstra->pred);
-  printf("%s\n", "== === ==");
-}
-
-static void   get_road(t_anthill *house)
-{
-  int         id;
-  int         x;
-  int         i;
-  int         i_room;
-
-  house->roads->nb_road = LIST_COUNT(house->dijkstra->pred[house->nb_rooms - 1]);
-  house->roads->road = (t_list_int **)malloc(sizeof(t_list_int *) * (house->roads->nb_road + 1));
-  house->roads->nb_step = (int *)malloc(sizeof(int *) * house->roads->nb_road);
-  ft_bzero(house->roads->road, sizeof(t_list_int *) * house->roads->nb_road);
-  house->roads->road[house->roads->nb_road] = NULL;
-  i_room = 0;
-  while (i_room < house->roads->nb_road)
-  {
-    printf("i_room: %d\n", i_room);
-    x = house->end->id;
-    push_id(&house->roads->road[i_room], x);
-    house->roads->nb_step[i_room] = house->dijkstra->dist[house->nb_rooms - 1]->nb;
-    printf("nb_step = %d\n", house->roads->nb_step[i_room]);
-    remove_id(&house->dijkstra->dist[x], house->dijkstra->dist[x]->nb);
-    i = 0;
-    while (i < house->roads->nb_step[i_room])
-    {
-      id = house->dijkstra->pred[x]->nb;
-      printf("x = %d, id = %d\n", x, id);
-      remove_id_all_list(house, house->dijkstra->pred, id);
-      push_id(&house->roads->road[i_room], id);
-      x = id;
-      i++;
-    }
-    infos(house);
-    i_room++;
-  }
 }
 
 void    dijkstra_it(t_anthill *house)
@@ -228,6 +79,5 @@ void    dijkstra_it(t_anthill *house)
   fill_it(house, x);
   while (house->dijkstra->already != NULL && (x = find_min(house)) != -1)
     fill_it(house, x);
-  infos(house);
-  get_road(house);
+  get_roads(house);
 }
