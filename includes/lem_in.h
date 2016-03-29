@@ -21,7 +21,7 @@ typedef struct s_roads t_roads;
 
 typedef struct	s_anthill
 {
-	int						nb_ant;
+	int						nb_ants;
 	int						nb_rooms;
 	t_ant_list		*ants;
 	t_room				*start;
@@ -58,7 +58,7 @@ struct		s_room
 	int				y;
 	int				x;
 	int				available;
-	int				nb_ant;
+	int				nb_ants;
 	int				visited;
 };
 
@@ -90,9 +90,10 @@ typedef struct	s_list_int
 
 struct s_roads
 {
-	int						nb_road;
+	int						nb_roads;
 	t_list_int		**road;
-	int						*nb_step;
+	int						*nb_steps;
+	int						*nb_ants;
 };
 
 struct	s_dijsktra

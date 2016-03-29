@@ -33,6 +33,7 @@ int		main(int argc, char const **argv)
 	connect_room(&house, "r6", "r8");
 	connect_room(&house, "r7", "r8");
 	print_matrix(house);
+	house.nb_ants = 25;
 	// print_matrix(house);
 	// add_ant(&house, "r1");
 	// add_ant(&house, "r1");
@@ -40,6 +41,7 @@ int		main(int argc, char const **argv)
 		show_anthill(house);
 
 	dijkstra_it(&house);
+	
 	int					i_r;
 
 	i_r = 0;

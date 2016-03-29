@@ -9,10 +9,10 @@ int    add_ant(t_anthill *house, char *room)
   if (room_is_available(hroom->room))
   {
     ant_l = LIST_NEW(t_ant_list);
-    ant_l->ant = new_ant(house->nb_ant++, hroom->room->y, hroom->room->x, 0);
-    hroom->room->nb_ant++;
+    ant_l->ant = new_ant(house->nb_ants++, hroom->room->y, hroom->room->x, 0);
+    hroom->room->nb_ants++;
     LIST_PUSH_FRONT(&house->ants, ant_l);
-    if (hroom->room->nb_ant >= hroom->room->capacity)
+    if (hroom->room->nb_ants >= hroom->room->capacity)
       hroom->room->available = 0;
     return (1);
   }
