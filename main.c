@@ -20,7 +20,23 @@ int		main(int argc, char const **argv)
 	add_room(&house, create_room("r6", 0, 0, ROOM_NORMAL));
 	add_room(&house, create_room("r7", 0, 0, ROOM_NORMAL));
 	add_room(&house, create_room("r8", 0, 0, ROOM_END));
+
+	add_room(&house, create_room("r9", 0, 0, ROOM_NORMAL));
+	add_room(&house, create_room("r10", 0, 0, ROOM_NORMAL));
+	add_room(&house, create_room("r11", 0, 0, ROOM_NORMAL));
+	add_room(&house, create_room("r12", 0, 0, ROOM_NORMAL));
+	add_room(&house, create_room("r13", 0, 0, ROOM_NORMAL));
+	add_room(&house, create_room("r14", 0, 0, ROOM_NORMAL));
+
 	init_dijsktra(&house);
+
+	// connect_room(&house, "r1", "r9");
+	// connect_room(&house, "r9", "r10");
+	// connect_room(&house, "r10", "r11");
+	// connect_room(&house, "r11", "r12");
+	// connect_room(&house, "r12", "r13");
+	// connect_room(&house, "r13", "r14");
+	// connect_room(&house, "r14", "r8");
 
 	connect_room(&house, "r1", "r2");
 	connect_room(&house, "r1", "r4");

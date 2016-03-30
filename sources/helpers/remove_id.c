@@ -4,7 +4,10 @@ int remove_id(t_list_int **list, int id)
 {
   t_list_int    *tmp;
   t_list_int    *prev;
+  t_list_int	*less;
+  int			ret;
 
+	ret = 0;
   tmp = *list;
   if (tmp->nb == id)
     *list = tmp->next;
@@ -14,10 +17,16 @@ int remove_id(t_list_int **list, int id)
     if (tmp->nb == id)
     {
       prev->next = tmp->next;
-      return (1);
+      ret = 1;
     }
     prev = tmp;
     tmp = tmp->next;
   }
-  return (0);
+  if (*list == NULL)
+  {
+	  less = LIST_NEW(t_list_int);
+	  less->nb = -1;
+	  LIST_PUSH_FRONT(list, less);
+  }
+  return (ret);
 }
