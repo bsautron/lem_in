@@ -22,8 +22,8 @@ static void step(t_anthill *house, int *ants_pos, int *road_taked, int *nb_step)
 	{
 		if (ants_pos[i_ant] != -1)
 		{
-			// if (nb_ants_moved)
-			// printf("%s", " ");
+			if (nb_ants_moved)
+			printf("%s", " ");
 			if (ants_pos[i_ant] == house->start->id)
 			{
 				ants_pos[i_ant] = house->roads->tab_roads[nb_ants_by_start][nb_step[i_ant]];
@@ -34,14 +34,14 @@ static void step(t_anthill *house, int *ants_pos, int *road_taked, int *nb_step)
 					house->roads->nb_roads--;
 				nb_ants_by_start++;
 				nb_ants_moved++;
-				// printf("L%d-%s", i_ant + 1, house->dijkstra->tab_rooms[ants_pos[i_ant]]->name);
+				printf("L%d-%s", i_ant + 1, house->dijkstra->tab_rooms[ants_pos[i_ant]]->name);
 			}
 			else
 			{
 				ants_pos[i_ant] = house->roads->tab_roads[road_taked[i_ant]][nb_step[i_ant]];
 				nb_step[i_ant]++;
 				nb_ants_moved++;
-				// printf("L%d-%s", i_ant + 1, house->dijkstra->tab_rooms[ants_pos[i_ant]]->name);
+				printf("L%d-%s", i_ant + 1, house->dijkstra->tab_rooms[ants_pos[i_ant]]->name);
 			}
 			if (ants_pos[i_ant] == house->end->id)
 			{
@@ -53,8 +53,8 @@ static void step(t_anthill *house, int *ants_pos, int *road_taked, int *nb_step)
 			break;
 		i_ant++;
 	}
-	// printf("%s\n", "");
-	print_state_ants(house, ants_pos);
+	printf("%s\n", "");
+	// print_state_ants(house, ants_pos);
 }
 
 void 	move_ants(t_anthill *house)

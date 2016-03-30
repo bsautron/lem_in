@@ -30,13 +30,13 @@ int		main(int argc, char const **argv)
 
 	init_dijsktra(&house);
 
-	// connect_room(&house, "r1", "r9");
-	// connect_room(&house, "r9", "r10");
-	// connect_room(&house, "r10", "r11");
-	// connect_room(&house, "r11", "r12");
-	// connect_room(&house, "r12", "r13");
-	// connect_room(&house, "r13", "r14");
-	// connect_room(&house, "r14", "r8");
+	connect_room(&house, "r1", "r9");
+	connect_room(&house, "r9", "r10");
+	connect_room(&house, "r10", "r11");
+	connect_room(&house, "r11", "r12");
+	connect_room(&house, "r12", "r13");
+	connect_room(&house, "r13", "r14");
+	connect_room(&house, "r14", "r8");
 
 	connect_room(&house, "r1", "r2");
 	connect_room(&house, "r1", "r4");
