@@ -5,11 +5,15 @@ int		main(int argc, char const **argv)
 	t_args			args;
 	t_anthill		house;
 
-	init_options(&args);
+	init_options(&args, "lem_in");
+	add_desc(&args, "Un programme qui fait ca.");
+	add_desc(&args, "Il prend en param des truk comme ca.");
+	add_desc(&args, "Le but est de fait ca.");
 	add_option(&args, "-s", "--show", "Show anthill");
-	add_option(&args, "-h", "--help", "Display help");
-	parse_options(&args, argc, argv);
-	/* --- */
+	add_option(&args, "-S", "--shosdfw", "Show anthill");
+	if (!parse_options(&args, argc, argv))
+		return (0);
+
 	house = init_anthill();
 	add_room(&house, create_room("r0", 0, 0, ROOM_NORMAL));
 	add_room(&house, create_room("r1", 0, 0, ROOM_START));
