@@ -30,11 +30,25 @@ SOURCES = create_room.c \
 			helpers/push_id.c \
 			helpers/remove_id.c \
 			\
+			parser/create_parser.c \
+			parser/parser.c \
+			parser/enter_scope.c \
+			parser/exit_scope.c \
+			parser/is_valid_room.c \
+			parser/is_valid_connection.c \
+			parser/sc_default.c \
+			parser/sc_nb_ants.c \
+			parser/sc_room.c \
+			parser/sc_room_start.c \
+			parser/sc_room_end.c \
+			parser/sc_connection.c \
+			\
 			errors/no_more_start_room.c \
 			errors/no_more_end_room.c \
 
 SOURCES_FOLDER = sources
 OTHER_FOLDER = errors \
+				parser \
 				helpers
 
 CC = clang
@@ -45,6 +59,7 @@ OBJECTS_FOLDER = .objects
 MAIN = main.c
 MAIN_OBJECT = $(OBJECTS_FOLDER)/$(MAIN:.c=.o)
 INCLUDES = $(NAME).h \
+			parser.h \
 			errors.h
 
 SOURCES_DEPENDENCIES = $(foreach dep, $(DEPENDENCIES), libraries/$(dep)/$(dep).a)
