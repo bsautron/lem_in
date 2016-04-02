@@ -14,6 +14,8 @@ static void fill_room(t_anthill *house, char *line, int explicit)
 
 int		sc_room(t_parser *parse, char *line, int explicit)
 {
+	int 	ret;
+
 	if (ft_strequ(line, "##start"))
 		enter_scope(parse, SC_ROOM_START);
 	else if (ft_strequ(line, "##end"))
@@ -24,7 +26,9 @@ int		sc_room(t_parser *parse, char *line, int explicit)
 	{
 		init_dijsktra(parse->house);
 		enter_scope(parse, SC_CONNECTION);
-		parser(parse, line, explicit);
+		ret = parser(parse, line, explicit);
+		if (ret == 2)
+			return (2);
 	}
 	else if (!ft_strnequ(line, "##", 2))
 		return (-1);

@@ -1,0 +1,10 @@
+23
+23 5 1
+##end
+2 626 4
+5 2 6
+##start
+caca 25 2
+##end
+caca2 25 2
+2-caca

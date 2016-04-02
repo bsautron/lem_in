@@ -77,13 +77,13 @@ void    dijkstra_it(t_anthill *house, int explicit)
 
 	if (!house->dijkstra)
 		no_connection(explicit);
-	else
+	else if (house->start && house->end)
 	{
 		house->dijkstra->dist[house->start->id]->nb = 0;
 		x = find_min(house);
-		fill_it(house, x);
+			fill_it(house, x);
 		while (house->dijkstra->already != NULL && (x = find_min(house)) != -1)
-		fill_it(house, x);
+			fill_it(house, x);
 		get_roads(house, explicit);
 	}
 }

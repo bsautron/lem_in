@@ -80,9 +80,9 @@ struct	s_dijsktra
 
 t_anthill	init_anthill(void);
 t_room		*create_room(char *name, int y, int x, char type);
-void		connect_room(t_anthill *house, char *room1, char *room2, int explicit);
+int			connect_room(t_anthill *house, char *room1, char *room2, int explicit);
 void		free_room(t_room *room);
-void		add_room(t_anthill *house, t_room *room, int explicit);
+int			add_room(t_anthill *house, t_room *room, int explicit);
 void		dijkstra_it(t_anthill *house, int explicit);
 void		init_dijsktra(t_anthill *house);
 void		print_matrix(t_anthill house);

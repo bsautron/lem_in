@@ -90,6 +90,11 @@ int		main(int argc, char const **argv)
 	if (option_is_set(args, "-r--road"))
 		show_road(house);
 	nb_step = move_ants(&house);
+	if (nb_step == -1)
+	{
+		ft_putendl_fd("ERROR", 2);
+		return (1);
+	}
 	if (option_is_set(args, "-s--step"))
 		show_nb_step(nb_step);
 	return (0);

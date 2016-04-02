@@ -55,6 +55,8 @@ int 	move_ants(t_anthill *house)
 	int		*nb_step;
 	int		i;
 
+	if (!house->dijkstra || !house->start || !house->end || !house->roads->nb_roads)
+		return (-1);
 	nb_steps = 0;
 	ants_pos = (int *)malloc(sizeof(int) * house->nb_ants);
 	road_taked = (int *)malloc(sizeof(int) * house->nb_ants);

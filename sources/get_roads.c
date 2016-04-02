@@ -129,5 +129,6 @@ void   get_roads(t_anthill *house, int explicit)
 		i_room++;
 	}
 	tab_list_to_tab_of_tab(house);
-	devide_ants(house);
+	if (house->roads->nb_roads)
+		devide_ants(house);
 }
