@@ -1,7 +1,9 @@
 #include <libft.h>
 
-void no_ants(void)
+void no_ants(int explicit)
 {
-	ft_putendl_fd("No ants", 2);
-	exit(1);
+	if (explicit)
+	{
+		ft_putendl_fd("No ants", 2);
+	}
 }

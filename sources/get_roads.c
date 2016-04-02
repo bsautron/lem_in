@@ -20,7 +20,7 @@ static int    remove_id_all_list(t_anthill *house, t_list_int **tab_list, int id
 	return (rem);
 }
 
-static void init_roads(t_anthill *house)
+static void init_roads(t_anthill *house, int explicit)
 {
 	int       	nb_roads;
 	t_list_int	*tmp;
@@ -28,7 +28,7 @@ static void init_roads(t_anthill *house)
 
 	nb_roads = LIST_COUNT(house->dijkstra->pred[house->end->id]);
 	if (house->dijkstra->pred[house->end->id]->nb == -1)
-		no_roads_found();
+		no_roads_found(explicit);
 	house->roads->nb_roads = (house->dijkstra->pred[house->end->id]->nb != -1) ? nb_roads : 0;
 	house->roads->road = (t_list_int **)malloc(sizeof(t_list_int *) * (nb_roads + 1));
 	house->roads->nb_steps = (int *)malloc(sizeof(int) * nb_roads);
@@ -98,14 +98,14 @@ static void 	tab_list_to_tab_of_tab(t_anthill *house)
 	}
 }
 
-void   get_roads(t_anthill *house)
+void   get_roads(t_anthill *house, int explicit)
 {
 	int         id;
 	int         x;
 	int         i;
 	int         i_room;
 
-	init_roads(house);
+	init_roads(house, explicit);
 	i_room = 0;
 	while (i_room < house->roads->nb_roads)
 	{

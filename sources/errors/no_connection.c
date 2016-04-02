@@ -1,7 +1,9 @@
 #include <libft.h>
 
-void no_connection(void)
+void no_connection(int explicit)
 {
-	ft_putendl_fd("No connection detected", 2);
-	exit(1);
+	if (explicit)
+	{
+		ft_putendl_fd("No connection detected", 2);
+	}
 }

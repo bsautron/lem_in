@@ -71,16 +71,16 @@ static int  find_min(t_anthill *house)
   return (ret);
 }
 
-void    dijkstra_it(t_anthill *house)
+void    dijkstra_it(t_anthill *house, int explicit)
 {
   int     x;
 
   if (!house->dijkstra)
-  	no_connection();
+  	no_connection(explicit);
   house->dijkstra->dist[house->start->id]->nb = 0;
   x = find_min(house);
   fill_it(house, x);
   while (house->dijkstra->already != NULL && (x = find_min(house)) != -1)
     fill_it(house, x);
-  get_roads(house);
+  get_roads(house, explicit);
 }

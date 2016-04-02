@@ -47,11 +47,12 @@ static void 	prepare_options(t_args *args, int argc, char const **argv)
 	add_option(args, "-m", "--matrix", "Show the adjacency matrix of th graph");
 	add_option(args, "-r", "--road", "Show the muli-road possible and how many ants per road");
 	add_option(args, "-s", "--step", "Show how many step all ants arrived in the end-room");
+	add_option(args, "-E", "--explicit", "Show exactly the good errors messages");
 	if (!parse_options(args, argc, argv))
 		exit(0);
 }
 
-static void parse_anthill(t_anthill *house)
+static void parse_anthill(t_anthill *house, int explicit)
 {
 	char			*line;
 	t_parser	parse;
@@ -60,7 +61,8 @@ static void parse_anthill(t_anthill *house)
 	parse = create_parser(house);
 	while (get_next_line(0, &line) > 0)
 	{
-		parser(&parse, line);
+		if (parser(&parse, line, explicit) != 1)
+			break ;
 		free(line);
 	}
 }
@@ -70,19 +72,21 @@ int		main(int argc, char const **argv)
 	t_args			args;
 	t_anthill		house;
 	int				nb_step;
+	int				explicit;
 
 	house = init_anthill();
 	prepare_options(&args, argc, argv);
-	parse_anthill(&house);
+	explicit = (option_is_set(args, "-E--explicit")) ? 1 : 0;
+	parse_anthill(&house, explicit);
 	if (!house.nb_ants)
-		no_ants();
+		no_ants(explicit);
 	if (!house.start)
-		no_start_room();
+		no_start_room(explicit);
 	if (!house.end)
-		no_end_room();
+		no_end_room(explicit);
 	if (option_is_set(args, "-m--matrix"))
 		print_matrix(house);
-	dijkstra_it(&house);
+	dijkstra_it(&house, explicit);
 	if (option_is_set(args, "-r--road"))
 		show_road(house);
 	nb_step = move_ants(&house);

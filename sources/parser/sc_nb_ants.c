@@ -1,7 +1,8 @@
 #include <parser.h>
 
-int		sc_nb_ants(t_parser *parser, char *line)
+int		sc_nb_ants(t_parser *parser, char *line, int explicit)
 {
+	(void)explicit;
 	if (!ft_isnan(line))
 	{
 		parser->house->nb_ants = ft_atoi(line);

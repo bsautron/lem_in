@@ -1,7 +1,9 @@
 #include <libft.h>
 
-void no_start_room(void)
+void no_start_room(int explicit)
 {
-	ft_putendl_fd("Please create a start room", 2);
-	exit(1);
+	if (explicit)
+	{
+		ft_putendl_fd("Please create a start room", 2);
+	}
 }

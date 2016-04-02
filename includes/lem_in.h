@@ -80,13 +80,13 @@ struct	s_dijsktra
 
 t_anthill	init_anthill(void);
 t_room		*create_room(char *name, int y, int x, char type);
-void		connect_room(t_anthill *house, char *room1, char *room2);
+void		connect_room(t_anthill *house, char *room1, char *room2, int explicit);
 void		free_room(t_room *room);
-void		add_room(t_anthill *house, t_room *room);
-void		dijkstra_it(t_anthill *house);
+void		add_room(t_anthill *house, t_room *room, int explicit);
+void		dijkstra_it(t_anthill *house, int explicit);
 void		init_dijsktra(t_anthill *house);
 void		print_matrix(t_anthill house);
-void		get_roads(t_anthill *house);
+void		get_roads(t_anthill *house, int explicit);
 int			move_ants(t_anthill *house);
 int			find_min_list_int(t_list_int *list);
 void		push_id(t_list_int **list, int id);

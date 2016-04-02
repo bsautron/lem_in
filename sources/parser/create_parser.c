@@ -13,6 +13,6 @@ t_parser create_parser(t_anthill *house)
 	parse.fn_scope[SC_ROOM_END] = &sc_room_end;
 	parse.fn_scope[SC_CONNECTION] = &sc_connection;
 	enter_scope(&parse, SC_DEFAULT);
-	parser(&parse, NULL);
+	parser(&parse, NULL, 0);
 	return (parse);
 }

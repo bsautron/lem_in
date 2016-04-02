@@ -1,7 +1,9 @@
 #include <libft.h>
 
-void no_roads_found(void)
+void no_roads_found(int explicit)
 {
-	ft_putendl_fd("No roads found", 2);
-	exit(1);
+	if (explicit)
+	{
+		ft_putendl_fd("No roads found", 2);
+	}
 }

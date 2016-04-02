@@ -1,7 +1,9 @@
 #include <libft.h>
 
-void    no_more_start_room(void)
+void    no_more_start_room(int explicit)
 {
-  ft_putendl_fd("Too much start-room added", 2);
-  exit(1);
+	if (explicit)
+	{
+		ft_putendl_fd("Too much start-room added", 2);
+  	}
 }

@@ -20,12 +20,12 @@ void      add_hl_room(t_anthill *house, t_room *room)
     house->end = room;
 }
 
-void      add_room(t_anthill *house, t_room *room)
+void      add_room(t_anthill *house, t_room *room, int explicit)
 {
   if (room->type == ROOM_START && house->start != 0)
-    no_more_start_room();
+    no_more_start_room(explicit);
   else if (room->type == ROOM_END && house->end != 0)
-    no_more_end_room();
+    no_more_end_room(explicit);
   else
     add_hl_room(house, room);
 }
