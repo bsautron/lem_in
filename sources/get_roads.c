@@ -127,9 +127,4 @@ void   get_roads(t_anthill *house)
 	}
 	tab_list_to_tab_of_tab(house);
 	devide_ants(house);
-
-	for (int i = 0; i < house->roads->nb_roads; i++)
-	{
-		printf("road: %d, %d ants\n", i, house->roads->nb_ants[i]);
-	}
 }

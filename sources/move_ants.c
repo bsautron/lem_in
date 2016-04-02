@@ -1,14 +1,5 @@
 #include <lem_in.h>
 
-static void print_state_ants(t_anthill *house, int *ants_pos)
-{
-	int		i;
-	i = 0;
-	while (i < house->nb_ants)
-		printf(" %2d |", ants_pos[i++]);
-	printf("%s\n", "");
-}
-
 static void step(t_anthill *house, int *ants_pos, int *road_taked, int *nb_step)
 {
 	int		i_ant;
@@ -54,10 +45,9 @@ static void step(t_anthill *house, int *ants_pos, int *road_taked, int *nb_step)
 		i_ant++;
 	}
 	printf("%s\n", "");
-	// print_state_ants(house, ants_pos);
 }
 
-void 	move_ants(t_anthill *house)
+int 	move_ants(t_anthill *house)
 {
 	int		nb_steps;;
 	int		*ants_pos;
@@ -77,11 +67,7 @@ void 	move_ants(t_anthill *house)
 	while (i < house->nb_ants)
 		road_taked[i++] = -1;
 	i = 0;
-	while (i < house->nb_ants)
-		printf(" %2d |", i++);
-	printf("%s\n", "");
-	print_state_ants(house, ants_pos);
 	while (++nb_steps && house->nb_ants_arrived != house->nb_ants)
 		step(house, ants_pos, road_taked, nb_step);
-	printf("%d step\n", nb_steps - 1);
+	return (nb_steps - 1);
 }

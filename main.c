@@ -1,52 +1,85 @@
 #include <lem_in.h>
 #include <parser.h>
 
+static void 	show_road(t_anthill house)
+{
+	int		i_room;
+	t_list_int	*tmp;
+
+	i_room = 0;
+	ft_putendl("ROADS:");
+	while (i_room < house.roads->nb_roads)
+	{
+		ft_putstr("\t");
+		ft_putnbr(i_room + 1);
+		ft_putstr(" (");
+		ft_putnbr(house.roads->nb_ants[i_room]);
+		ft_putstr(" ants, ");
+		ft_putnbr(house.roads->nb_steps[i_room]);
+		ft_putstr(" steps): ");
+		tmp = house.roads->road[i_room];
+		while (tmp)
+		{
+			ft_putstr(house.dijkstra->tab_rooms[tmp->nb]->name);
+			ft_putstr((tmp->next) ? " - " : "");
+			tmp = tmp->next;
+		}
+		ft_putchar('\n');
+		i_room++;
+	}
+	ft_putchar('\n');
+}
+
+static void 	show_nb_step(int nb)
+{
+	ft_putstr("\nNUMBER OF STEPS: ");
+	ft_putnbr(nb);
+	ft_putchar('\n');
+}
+
+static void 	prepare_options(t_args *args, int argc, char const **argv)
+{
+	init_options(args, "lem-in");
+	add_desc(args, "Un programme de fourmis.");
+	add_desc(args, "Il faut ecrir la fourmiliere sur l'entree standard. On pourra alors lui rediriger le contenu d'un fichier.");
+	add_desc(args, "Le but du projet est de trouver le moyen le plus rapide de faire traverser la fourmilière par n fourmis.");
+	add_option(args, "-m", "--matrix", "Show the adjacency matrix of th graph");
+	add_option(args, "-r", "--road", "Show the muli-road possible and how many ants per road");
+	add_option(args, "-s", "--step", "Show how many step all ants arrived in the end-room");
+	if (!parse_options(args, argc, argv))
+		exit(0);
+}
+
+static void parse_anthill(t_anthill *house)
+{
+	char			*line;
+	t_parser	parse;
+
+	line = NULL;
+	parse = create_parser(house);
+	while (get_next_line(0, &line) > 0)
+	{
+		parser(&parse, line);
+		free(line);
+	}
+}
+
 int		main(int argc, char const **argv)
 {
 	t_args			args;
 	t_anthill		house;
-
-	init_options(&args, "lem_in");
-	add_desc(&args, "Un programme de fourmis.");
-	add_desc(&args, "Il faut ecrir la fourmiliere sur l'entree standard. On pourra alors lui rediriger le contenu d'un fichier.");
-	add_desc(&args, "Le but du projet est de trouver le moyen le plus rapide de faire traverser la fourmilière par n fourmis.");
-	add_option(&args, "-s", "--show", "Show anthill");
-	add_option(&args, "-m", "--matrix", "Show the adjacency matrix of th graph");
-	if (!parse_options(&args, argc, argv))
-		return (0);
-
-	char	*line;
-	t_parser	parse;
+	int					nb_step;
 
 	house = init_anthill();
-	parse = create_parser(&house);
-
-	line = NULL;
-	while (get_next_line(0, &line) > 0)
-		parser(&parse, line);
-
+	prepare_options(&args, argc, argv);
+	parse_anthill(&house);
 	if (option_is_set(args, "-m--matrix"))
 		print_matrix(house);
-	if (option_is_set(args, "-s--show"))
-		show_anthill(house);
-
 	dijkstra_it(&house);
-
-	int					i_r;
-	int					i;
-
-	i_r = 0;
-	while (house.roads->road[i_r])
-	{
-		i = 0;
-		while (i < house.roads->nb_steps[i_r])
-		{
-			printf("%d ", house.roads->tab_roads[i_r][i]);
-			i++;
-		}
-		printf("%s\n", "");
-		i_r++;
-	}
-	move_ants(&house);
+	if (option_is_set(args, "-r--road"))
+		show_road(house);
+	nb_step = move_ants(&house);
+	if (option_is_set(args, "-s--step"))
+		show_nb_step(nb_step);
 	return (0);
 }

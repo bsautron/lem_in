@@ -1,22 +1,15 @@
-NAME = lem_in
+NAME = lem-in
 DEPENDENCIES = libft \
 				liblist \
 				libhash \
 				libhtab \
 				libargs
 SOURCES = create_room.c \
-			addtube_to_room.c \
 			connect_room.c \
-			room_is_available.c \
-			show_room_prive.c \
 			free_room.c \
 			add_room.c \
 			\
 			init_anthill.c \
-			show_anthill.c \
-			\
-			new_ant.c \
-			add_ant.c \
 			\
 			init_dijsktra.c \
 			dijkstra_it.c \
@@ -25,8 +18,6 @@ SOURCES = create_room.c \
 			move_ants.c \
 			\
 			helpers/find_min_list_int.c \
-			helpers/print_list.c \
-			helpers/print_tab_list.c \
 			helpers/push_id.c \
 			helpers/remove_id.c \
 			\
@@ -58,7 +49,7 @@ INCLUDES_FOLDER = includes
 OBJECTS_FOLDER = .objects
 MAIN = main.c
 MAIN_OBJECT = $(OBJECTS_FOLDER)/$(MAIN:.c=.o)
-INCLUDES = $(NAME).h \
+INCLUDES = lem_in.h \
 			parser.h \
 			errors.h
 

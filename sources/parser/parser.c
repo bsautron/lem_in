@@ -4,7 +4,6 @@ static int 	is_not_comment(char *line)
 {
 	if (line && line[0] == '#' && line[1] != '#')
 		return (0);
-	(void)line;
 	return (1);
 }
 

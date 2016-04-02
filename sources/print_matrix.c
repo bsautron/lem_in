@@ -10,17 +10,20 @@ void   print_matrix(t_anthill house)
   n = house.nb_rooms;
   matrix = house.dijkstra->adjacent_matrix;
   i = 0;
+  ft_putendl("ADJACENCY MATRIX:");
   while (matrix[i])
   {
     j = 0;
+    ft_putchar('\t');
     while (j < n)
     {
       if (j)
-        printf(", ");
-      printf("%d", matrix[i][j]);
+        ft_putstr(", ");
+      ft_putnbr(matrix[i][j]);
       j++;
     }
     i++;
-    printf("\n");
+    ft_putstr("\n");
   }
+  ft_putstr("\n");
 }
