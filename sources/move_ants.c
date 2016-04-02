@@ -59,11 +59,13 @@ static void step(t_anthill *house, int *ants_pos, int *road_taked, int *nb_step)
 
 void 	move_ants(t_anthill *house)
 {
+	int		nb_steps;;
 	int		*ants_pos;
 	int		*road_taked;
 	int		*nb_step;
 	int		i;
 
+	nb_steps = 0;
 	ants_pos = (int *)malloc(sizeof(int) * house->nb_ants);
 	road_taked = (int *)malloc(sizeof(int) * house->nb_ants);
 	nb_step = (int *)malloc(sizeof(int) * house->nb_ants);
@@ -79,6 +81,7 @@ void 	move_ants(t_anthill *house)
 		printf(" %2d |", i++);
 	printf("%s\n", "");
 	print_state_ants(house, ants_pos);
-	while (house->nb_ants_arrived != house->nb_ants)
+	while (++nb_steps && house->nb_ants_arrived != house->nb_ants)
 		step(house, ants_pos, road_taked, nb_step);
+	printf("%d step\n", nb_steps - 1);
 }

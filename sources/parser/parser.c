@@ -13,6 +13,6 @@ void parser(t_parser *parser, char *line)
 	if (is_not_comment(line))
 	{
 		if (parser->fn_scope[parser->scope->type](parser, line) == -1)
-			printf("%s\n", "ERROR PARSING");
+			printf("%s: \"%s\"\n", "[ERROR PARSING]", line);
 	}
 }
