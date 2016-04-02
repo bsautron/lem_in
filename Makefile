@@ -34,8 +34,14 @@ SOURCES = create_room.c \
 			parser/sc_room_end.c \
 			parser/sc_connection.c \
 			\
+			errors/no_ants.c \
+			errors/no_start_room.c \
+			errors/no_end_room.c \
 			errors/no_more_start_room.c \
 			errors/no_more_end_room.c \
+			errors/no_roads_found.c \
+			errors/no_connection.c \
+			errors/print_error_parsing.c \
 
 SOURCES_FOLDER = sources
 OTHER_FOLDER = errors \

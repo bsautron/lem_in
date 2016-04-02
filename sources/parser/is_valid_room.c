@@ -5,6 +5,8 @@ int		is_valid_room(char *line)
 	int		pos;
 
 	pos = 0;
+	if (line[0] == 'L')
+		return (0);
 	while (line[pos] > ' ' && line[pos] != '-' && ft_isprint(line[pos++]));
 	if (line[pos++] != ' ')
 		return (0);

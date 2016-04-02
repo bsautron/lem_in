@@ -1,4 +1,5 @@
 #include <lem_in.h>
+#include <errors.h>
 
 static int    remove_id_all_list(t_anthill *house, t_list_int **tab_list, int id)
 {
@@ -26,7 +27,9 @@ static void init_roads(t_anthill *house)
 	int			i;
 
 	nb_roads = LIST_COUNT(house->dijkstra->pred[house->end->id]);
-	house->roads->nb_roads = nb_roads;
+	if (house->dijkstra->pred[house->end->id]->nb == -1)
+		no_roads_found();
+	house->roads->nb_roads = (house->dijkstra->pred[house->end->id]->nb != -1) ? nb_roads : 0;
 	house->roads->road = (t_list_int **)malloc(sizeof(t_list_int *) * (nb_roads + 1));
 	house->roads->nb_steps = (int *)malloc(sizeof(int) * nb_roads);
 	house->roads->nb_ants = (int *)malloc(sizeof(int) * nb_roads);

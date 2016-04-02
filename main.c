@@ -1,5 +1,6 @@
 #include <lem_in.h>
 #include <parser.h>
+#include <errors.h>
 
 static void 	show_road(t_anthill house)
 {
@@ -68,11 +69,17 @@ int		main(int argc, char const **argv)
 {
 	t_args			args;
 	t_anthill		house;
-	int					nb_step;
+	int				nb_step;
 
 	house = init_anthill();
 	prepare_options(&args, argc, argv);
 	parse_anthill(&house);
+	if (!house.nb_ants)
+		no_ants();
+	if (!house.start)
+		no_start_room();
+	if (!house.end)
+		no_end_room();
 	if (option_is_set(args, "-m--matrix"))
 		print_matrix(house);
 	dijkstra_it(&house);

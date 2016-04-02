@@ -14,7 +14,7 @@ static void step(t_anthill *house, int *ants_pos, int *road_taked, int *nb_step)
 		if (ants_pos[i_ant] != -1)
 		{
 			if (nb_ants_moved)
-			printf("%s", " ");
+				printf("%s", " ");
 			if (ants_pos[i_ant] == house->start->id)
 			{
 				ants_pos[i_ant] = house->roads->tab_roads[nb_ants_by_start][nb_step[i_ant]];

@@ -1,4 +1,5 @@
 #include <lem_in.h>
+#include <errors.h>
 
 static void push_pop_id(t_anthill *house, int id)
 {
@@ -74,6 +75,8 @@ void    dijkstra_it(t_anthill *house)
 {
   int     x;
 
+  if (!house->dijkstra)
+  	no_connection();
   house->dijkstra->dist[house->start->id]->nb = 0;
   x = find_min(house);
   fill_it(house, x);

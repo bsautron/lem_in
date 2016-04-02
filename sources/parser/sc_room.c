@@ -26,7 +26,7 @@ int		sc_room(t_parser *parse, char *line)
 		enter_scope(parse, SC_CONNECTION);
 		parser(parse, line);
 	}
-	else
+	else if (!ft_strnequ(line, "##", 2))
 		return (-1);
 	return (0);
 }

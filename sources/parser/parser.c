@@ -1,4 +1,5 @@
 #include <parser.h>
+#include <errors.h>
 
 static int 	is_not_comment(char *line)
 {
@@ -12,6 +13,9 @@ void parser(t_parser *parser, char *line)
 	if (is_not_comment(line))
 	{
 		if (parser->fn_scope[parser->scope->type](parser, line) == -1)
-			printf("%s: \"%s\"\n", "[ERROR PARSING]", line);
+		{
+			print_error_parsing(parser->scope->type, line);
+			exit(1);
+		}
 	}
 }
