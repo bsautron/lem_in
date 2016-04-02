@@ -1,6 +1,7 @@
 #include <lem_in.h>
 #include <errors.h>
 
+
 static int    remove_id_all_list(t_anthill *house, t_list_int **tab_list, int id)
 {
 	int   rem;
@@ -13,7 +14,9 @@ static int    remove_id_all_list(t_anthill *house, t_list_int **tab_list, int id
 		while (i < house->nb_rooms)
 		{
 			if (tab_list[i] && house->dijkstra->tab_rooms[id]->type != ROOM_START && remove_id(&tab_list[i], id))
-			rem = 1;
+				rem = 1;
+			if (tab_list[i] && house->dijkstra->tab_rooms[id]->type == ROOM_START && i == house->end->id && remove_id(&tab_list[i], id))
+				rem = 1;
 			i++;
 		}
 	}
