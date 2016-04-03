@@ -44,10 +44,13 @@ static void 	prepare_options(t_args *args, int argc, char const **argv)
 	add_desc(args, "Un programme de fourmis.");
 	add_desc(args, "Il faut ecrir la fourmiliere sur l'entree standard. On pourra alors lui rediriger le contenu d'un fichier.");
 	add_desc(args, "Le but du projet est de trouver le moyen le plus rapide de faire traverser la fourmilière par n fourmis.");
+	add_usage(args, "./lem-in [options ...]");
 	add_option(args, "-m", "--matrix", "Show the adjacency matrix of th graph");
 	add_option(args, "-r", "--road", "Show the muli-road possible and how many ants per road");
 	add_option(args, "-s", "--step", "Show how many step all ants arrived in the end-room");
 	add_option(args, "-E", "--explicit", "Show exactly the good errors messages");
+	add_option(args, 0, "--no_config", "Don't print the anthill config");
+	add_option(args, 0, "--no_move", "Don't print the ants move");
 	if (!parse_options(args, argc, argv))
 		exit(0);
 }
@@ -94,26 +97,32 @@ int		main(int argc, char const **argv)
 		ft_putendl_fd("ERROR", 2);
 		return (1);
 	}
-	while (house.saved)
+	if (!option_is_set(args, "--no_config"))
 	{
-		ft_putendl(house.saved->line);
-		house.saved = house.saved->next;
-	}
-	ft_putchar('\n');
-	while (house.list_move)
-	{
-		while (house.list_move->move)
+		while (house.saved)
 		{
-			ft_putchar('L');
-			ft_putnbr(house.list_move->move->ant_id + 1);
-			ft_putchar('-');
-			ft_putstr(house.dijkstra->tab_rooms[house.list_move->move->room_id]->name);
-			if (house.list_move->move->next)
-				ft_putstr(" ");
-			house.list_move->move = house.list_move->move->next;
+			ft_putendl(house.saved->line);
+			house.saved = house.saved->next;
 		}
 		ft_putchar('\n');
-		house.list_move = house.list_move->next;
+	}
+	if (!option_is_set(args, "--no_move"))
+	{
+		while (house.list_move)
+		{
+			while (house.list_move->move)
+			{
+				ft_putchar('L');
+				ft_putnbr(house.list_move->move->ant_id + 1);
+				ft_putchar('-');
+				ft_putstr(house.dijkstra->tab_rooms[house.list_move->move->room_id]->name);
+				if (house.list_move->move->next)
+				ft_putstr(" ");
+				house.list_move->move = house.list_move->move->next;
+			}
+			ft_putchar('\n');
+			house.list_move = house.list_move->next;
+		}
 	}
 	if (option_is_set(args, "-s--step"))
 		show_nb_step(nb_step);
