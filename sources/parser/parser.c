@@ -26,7 +26,6 @@ int parser(t_parser *parser, char *line, int explicit)
 
 	if (line && ft_strnequ(line, "##", 2) && !ft_strequ(line, "##end") && !ft_strequ(line, "##start"))
 		return (1);
-	save_line(parser, line);
 	if (is_not_comment(line))
 	{
 		ret = parser->fn_scope[parser->scope->type](parser, line, explicit);
@@ -37,6 +36,7 @@ int parser(t_parser *parser, char *line, int explicit)
 		}
 		else if (ret == 2)
 			return (2);
+		save_line(parser, line);
 	}
 	return (1);
 }
