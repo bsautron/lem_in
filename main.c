@@ -63,7 +63,6 @@ static void parse_anthill(t_anthill *house, int explicit)
 	{
 		if (parser(&parse, line, explicit) != 1)
 			break ;
-		free(line);
 	}
 }
 
@@ -94,6 +93,27 @@ int		main(int argc, char const **argv)
 	{
 		ft_putendl_fd("ERROR", 2);
 		return (1);
+	}
+	while (house.saved)
+	{
+		ft_putendl(house.saved->line);
+		house.saved = house.saved->next;
+	}
+	ft_putchar('\n');
+	while (house.list_move)
+	{
+		while (house.list_move->move)
+		{
+			ft_putchar('L');
+			ft_putnbr(house.list_move->move->ant_id + 1);
+			ft_putchar('-');
+			ft_putstr(house.dijkstra->tab_rooms[house.list_move->move->room_id]->name);
+			if (house.list_move->move->next)
+				ft_putstr(" ");
+			house.list_move->move = house.list_move->move->next;
+		}
+		ft_putchar('\n');
+		house.list_move = house.list_move->next;
 	}
 	if (option_is_set(args, "-s--step"))
 		show_nb_step(nb_step);

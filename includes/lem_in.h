@@ -16,6 +16,9 @@ typedef struct s_room_list	t_room_list;
 typedef struct s_room_htab	t_room_htab;
 typedef struct s_dijsktra	t_dijsktra;
 typedef struct s_roads		t_roads;
+typedef struct s_line		t_line;
+typedef struct s_list_move	t_list_move;
+typedef struct s_move		t_move;
 
 typedef struct	s_anthill
 {
@@ -28,7 +31,15 @@ typedef struct	s_anthill
 	t_htab			htab;
 	t_dijsktra		*dijkstra;
 	t_roads 		*roads;
+	t_line			*saved;
+	t_list_move		*list_move;
 }				t_anthill;
+
+struct	s_line
+{
+	void 	*next;
+	char	*line;
+};
 
 struct	s_room
 {
@@ -76,6 +87,19 @@ struct	s_dijsktra
 	t_list_int    	**pred;
 	t_list_int    	**dist;
 	t_list_int		**road;
+};
+
+struct	s_list_move
+{
+	void 	*next;
+	t_move 	*move;
+};
+
+struct	s_move
+{
+	void 	*next;
+	int		ant_id;
+	int		room_id;
 };
 
 t_anthill	init_anthill(void);
