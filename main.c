@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/04/03 22:24:10 by bsautron          #+#    #+#             */
+/*   Updated: 2016/04/03 22:44:40 by bsautron         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <lem_in.h>
 #include <parser.h>
 #include <errors.h>
 
-static void 	show_road(t_anthill house)
+static void		show_road(t_anthill house)
 {
-	int		i_room;
+	int			i_room;
 	t_list_int	*tmp;
 
 	i_room = 0;
@@ -31,49 +43,55 @@ static void 	show_road(t_anthill house)
 	ft_putchar('\n');
 }
 
-static void 	show_nb_step(int nb)
+static void		show_nb_step(int nb)
 {
 	ft_putstr("\nNUMBER OF STEPS: ");
 	ft_putnbr(nb);
 	ft_putchar('\n');
 }
 
-static void 	prepare_options(t_args *args, int argc, char const **argv)
+static void		prepare_options(t_args *args, int argc, char const **argv)
 {
 	init_options(args, "lem-in");
 	add_desc(args, "Un programme de fourmis.");
-	add_desc(args, "Il faut ecrir la fourmiliere sur l'entree standard. On pourra alors lui rediriger le contenu d'un fichier.");
-	add_desc(args, "Le but du projet est de trouver le moyen le plus rapide de faire traverser la fourmilière par n fourmis.");
+	add_desc(args, "Il faut ecrir la fourmiliere sur l'entree standard.");
+	add_desc(args, "On pourra alors lui rediriger le contenu d'un fichier.");
+	add_desc(args, "Le but du projet est de trouver le moyen le plus rapide");
+	add_desc(args, "	de faire traverser la fourmilière par n fourmis.");
 	add_usage(args, "./lem-in [options ...]");
 	add_option(args, "-m", "--matrix", "Show the adjacency matrix of th graph");
-	add_option(args, "-r", "--road", "Show the muli-road possible and how many ants per road");
-	add_option(args, "-s", "--step", "Show how many step all ants arrived in the end-room");
-	add_option(args, "-E", "--explicit", "Show exactly the good errors messages");
+	add_option(args, "-r", "--road", "Show the muli-road possible");
+	add_option(args, "-s", "--step", "Show how many step for the solution");
+	add_option(args, "-E", "--explicit", "Show exactly the good errormessages");
 	add_option(args, 0, "--no_config", "Don't print the anthill config");
 	add_option(args, 0, "--no_move", "Don't print the ants move");
 	if (!parse_options(args, argc, argv))
 		exit(0);
 }
 
-static void parse_anthill(t_anthill *house, int explicit)
+static int		final(t_args args, t_anthill *house)
 {
-	char			*line;
-	t_parser	parse;
+	int		nb_step;
 
-	line = NULL;
-	parse = create_parser(house);
-	while (get_next_line(0, &line) > 0)
+	nb_step = move_ants(house);
+	if (nb_step == -1)
 	{
-		if (parser(&parse, line, explicit) != 1)
-			break ;
+		ft_putendl_fd("ERROR", 2);
+		return (-1);
 	}
+	if (!option_is_set(args, "--no_config"))
+		print_config(house->saved);
+	if (!option_is_set(args, "--no_move"))
+		print_move(*house, house->list_move);
+	if (option_is_set(args, "-s--step"))
+		show_nb_step(nb_step);
+	return (0);
 }
 
-int		main(int argc, char const **argv)
+int				main(int argc, char const **argv)
 {
 	t_args			args;
 	t_anthill		house;
-	int				nb_step;
 	int				explicit;
 
 	house = init_anthill();
@@ -91,40 +109,7 @@ int		main(int argc, char const **argv)
 	dijkstra_it(&house, explicit);
 	if (option_is_set(args, "-r--road"))
 		show_road(house);
-	nb_step = move_ants(&house);
-	if (nb_step == -1)
-	{
-		ft_putendl_fd("ERROR", 2);
+	if (final(args, &house) == -1)
 		return (1);
-	}
-	if (!option_is_set(args, "--no_config"))
-	{
-		while (house.saved)
-		{
-			ft_putendl(house.saved->line);
-			house.saved = house.saved->next;
-		}
-		ft_putchar('\n');
-	}
-	if (!option_is_set(args, "--no_move"))
-	{
-		while (house.list_move)
-		{
-			while (house.list_move->move)
-			{
-				ft_putchar('L');
-				ft_putnbr(house.list_move->move->ant_id + 1);
-				ft_putchar('-');
-				ft_putstr(house.dijkstra->tab_rooms[house.list_move->move->room_id]->name);
-				if (house.list_move->move->next)
-				ft_putstr(" ");
-				house.list_move->move = house.list_move->move->next;
-			}
-			ft_putchar('\n');
-			house.list_move = house.list_move->next;
-		}
-	}
-	if (option_is_set(args, "-s--step"))
-		show_nb_step(nb_step);
 	return (0);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/04/03 22:46:23 by bsautron          #+#    #+#             */
+/*   Updated: 2016/04/03 22:47:42 by bsautron         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSER_H
 # define PARSER_H
 
@@ -19,30 +31,30 @@ enum	e_scope_type
 
 typedef struct	s_scope
 {
-	void 	*next;
+	void	*next;
 	int		type;
 }				t_scope;
 
-struct	s_parser
+struct			s_parser
 {
 	t_anthill	*house;
 	int			nb_scope;
 	int			current_scope;
 	t_scope		*scope;
-	int 		(*fn_scope[NB_SCOPE])(t_parser *, char *, int);
+	int			(*fn_scope[NB_SCOPE])(t_parser *, char *, int);
 };
 
-t_parser	create_parser(t_anthill *house);
-int 		parser(t_parser *parser, char *line, int explicit);
-void 		enter_scope(t_parser *parser, int type);
-void 		exit_scope(t_parser *parser);
-int			is_valid_room(char *line);
-int			is_valid_connection(char *line);
-int			sc_default(t_parser *parser, char *line, int explicit);
-int			sc_nb_ants(t_parser *parser, char *line, int explicit);
-int			sc_room(t_parser *parser, char *line, int explicit);
-int			sc_room_start(t_parser *parser, char *line, int explicit);
-int			sc_room_end(t_parser *parser, char *line, int explicit);
-int			sc_connection(t_parser *parser, char *line, int explicit);
+t_parser		create_parser(t_anthill *house);
+int				parser(t_parser *parser, char *line, int explicit);
+void			enter_scope(t_parser *parser, int type);
+void			exit_scope(t_parser *parser);
+int				is_valid_room(char *line);
+int				is_valid_connection(char *line);
+int				sc_default(t_parser *parser, char *line, int explicit);
+int				sc_nb_ants(t_parser *parser, char *line, int explicit);
+int				sc_room(t_parser *parser, char *line, int explicit);
+int				sc_room_start(t_parser *parser, char *line, int explicit);
+int				sc_room_end(t_parser *parser, char *line, int explicit);
+int				sc_connection(t_parser *parser, char *line, int explicit);
 
 #endif

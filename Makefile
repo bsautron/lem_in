@@ -22,6 +22,7 @@ SOURCES = create_room.c \
 			add_room.c \
 			\
 			init_anthill.c \
+			parse_anthill.c \
 			\
 			init_dijkstra.c \
 			dijkstra_it.c \
@@ -29,6 +30,8 @@ SOURCES = create_room.c \
 			get_roads.c \
 			move_ants.c \
 			tab_list_to_tab_of_tab.c \
+			print_config.c \
+			print_move.c \
 			\
 			helpers/find_min_list_int.c \
 			helpers/push_id.c \

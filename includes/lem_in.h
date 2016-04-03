@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/03 19:49:56 by bsautron          #+#    #+#             */
-/*   Updated: 2016/04/03 21:02:42 by bsautron         ###   ########.fr       */
+/*   Updated: 2016/04/03 22:49:33 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <liblist.h>
 # include <libhtab.h>
 # include <libargs.h>
-# include <stdio.h>//
 
 # define ROOM_NORMAL		0
 # define ROOM_START			1
@@ -42,18 +41,18 @@ typedef struct	s_anthill
 	t_room_list		*rooms;
 	t_htab			htab;
 	t_dijkstra		*dijkstra;
-	t_roads 		*roads;
+	t_roads			*roads;
 	t_line			*saved;
 	t_list_move		*list_move;
 }				t_anthill;
 
-struct	s_line
+struct			s_line
 {
-	void 	*next;
+	void	*next;
 	char	*line;
 };
 
-struct	s_room
+struct			s_room
 {
 	int		id;
 	char	*name;
@@ -62,26 +61,26 @@ struct	s_room
 	int		x;
 };
 
-struct	s_room_list
+struct			s_room_list
 {
-	void 	*next;
+	void	*next;
 	t_room	*room;
 };
 
-struct	s_room_htab
+struct			s_room_htab
 {
-	void 	*next;
+	void	*next;
 	char	*key;
 	t_room	*room;
 };
 
 typedef struct	s_list_int
 {
-	void 	*next;
+	void	*next;
 	int		nb;
 }				t_list_int;
 
-struct		s_roads
+struct			s_roads
 {
 	int			nb_roads;
 	t_list_int	**road;
@@ -92,7 +91,7 @@ struct		s_roads
 	int			*ants_pos;
 };
 
-struct	s_dijkstra
+struct			s_dijkstra
 {
 	int				**adjacent_matrix;
 	t_room			**tab_rooms;
@@ -103,33 +102,35 @@ struct	s_dijkstra
 	t_list_int		**road;
 };
 
-struct	s_list_move
+struct			s_list_move
 {
-	void 	*next;
-	t_move 	*move;
+	void	*next;
+	t_move	*move;
 };
 
-struct	s_move
+struct			s_move
 {
-	void 	*next;
+	void	*next;
 	int		ant_id;
 	int		room_id;
 };
 
-t_anthill	init_anthill(void);
-t_room		*create_room(char *name, int y, int x, char type);
-int			connect_room(t_anthill *house, char *room1, char *room2, int explicit);
-void		free_room(t_room *room);
-int			add_room(t_anthill *house, t_room *room, int explicit);
-void		dijkstra_it(t_anthill *house, int explicit);
-void		init_dijkstra(t_anthill *house);
-void		print_matrix(t_anthill house);
-void		get_roads(t_anthill *house, int explicit);
-int			move_ants(t_anthill *house);
-int			find_min_list_int(t_list_int *list);
-void		push_id(t_list_int **list, int id);
-int			remove_id(t_list_int **list, int id);
-void		tab_list_to_tab_of_tab(t_anthill *house);
-
+t_anthill		init_anthill(void);
+t_room			*create_room(char *name, int y, int x, char type);
+int				connect_room(t_anthill *house, char *room1, char *room2, int e);
+void			free_room(t_room *room);
+int				add_room(t_anthill *house, t_room *room, int explicit);
+void			dijkstra_it(t_anthill *house, int explicit);
+void			init_dijkstra(t_anthill *house);
+void			print_matrix(t_anthill house);
+void			get_roads(t_anthill *house, int explicit);
+int				move_ants(t_anthill *house);
+int				find_min_list_int(t_list_int *list);
+void			push_id(t_list_int **list, int id);
+int				remove_id(t_list_int **list, int id);
+void			tab_list_to_tab_of_tab(t_anthill *house);
+void			parse_anthill(t_anthill *house, int explicit);
+void			print_move(t_anthill house, t_list_move *list_move);
+void			print_config(t_line *saved);
 
 #endif
