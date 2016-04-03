@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/04/03 19:49:40 by bsautron          #+#    #+#              #
+#    Updated: 2016/04/03 20:33:44 by bsautron         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = lem-in
 DEPENDENCIES = libft \
 				liblist \
@@ -11,7 +23,7 @@ SOURCES = create_room.c \
 			\
 			init_anthill.c \
 			\
-			init_dijsktra.c \
+			init_dijkstra.c \
 			dijkstra_it.c \
 			print_matrix.c \
 			get_roads.c \

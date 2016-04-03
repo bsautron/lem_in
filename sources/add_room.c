@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_room.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/04/03 19:48:00 by bsautron          #+#    #+#             */
+/*   Updated: 2016/04/03 19:48:23 by bsautron         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <lem_in.h>
 #include <errors.h>
 
-void      add_hl_room(t_anthill *house, t_room *room)
+static void	add_hl_room(t_anthill *house, t_room *room)
 {
-	t_room_list   *new_l;
-	t_room_htab   *new_h;
+	t_room_list	*new_l;
+	t_room_htab	*new_h;
 
 	room->id = house->nb_rooms++;
 	if (room->type == ROOM_START)
@@ -20,7 +32,7 @@ void      add_hl_room(t_anthill *house, t_room *room)
 	HTAB_SET(&house->htab, new_h);
 }
 
-int      add_room(t_anthill *house, t_room *room, int explicit)
+int			add_room(t_anthill *house, t_room *room, int explicit)
 {
 	if (room->type == ROOM_START && house->start != 0)
 		no_more_start_room(explicit);

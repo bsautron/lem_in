@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lem_in.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/04/03 19:49:56 by bsautron          #+#    #+#             */
+/*   Updated: 2016/04/03 21:02:42 by bsautron         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
@@ -14,7 +26,7 @@
 typedef struct s_room		t_room;
 typedef struct s_room_list	t_room_list;
 typedef struct s_room_htab	t_room_htab;
-typedef struct s_dijsktra	t_dijsktra;
+typedef struct s_dijkstra	t_dijkstra;
 typedef struct s_roads		t_roads;
 typedef struct s_line		t_line;
 typedef struct s_list_move	t_list_move;
@@ -29,7 +41,7 @@ typedef struct	s_anthill
 	t_room			*end;
 	t_room_list		*rooms;
 	t_htab			htab;
-	t_dijsktra		*dijkstra;
+	t_dijkstra		*dijkstra;
 	t_roads 		*roads;
 	t_line			*saved;
 	t_list_move		*list_move;
@@ -76,16 +88,18 @@ struct		s_roads
 	int			*nb_steps;
 	int			*nb_ants;
 	int			**tab_roads;
+	int			*road_taked;
+	int			*ants_pos;
 };
 
-struct	s_dijsktra
+struct	s_dijkstra
 {
 	int				**adjacent_matrix;
 	t_room			**tab_rooms;
-	t_list_int    	*already;
-	t_list_int    	*rest;
-	t_list_int    	**pred;
-	t_list_int    	**dist;
+	t_list_int		*already;
+	t_list_int		*rest;
+	t_list_int		**pred;
+	t_list_int		**dist;
 	t_list_int		**road;
 };
 
@@ -108,7 +122,7 @@ int			connect_room(t_anthill *house, char *room1, char *room2, int explicit);
 void		free_room(t_room *room);
 int			add_room(t_anthill *house, t_room *room, int explicit);
 void		dijkstra_it(t_anthill *house, int explicit);
-void		init_dijsktra(t_anthill *house);
+void		init_dijkstra(t_anthill *house);
 void		print_matrix(t_anthill house);
 void		get_roads(t_anthill *house, int explicit);
 int			move_ants(t_anthill *house);

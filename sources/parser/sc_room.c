@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sc_room.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/04/03 20:33:01 by bsautron          #+#    #+#             */
+/*   Updated: 2016/04/03 20:33:11 by bsautron         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <parser.h>
 
 static void fill_room(t_anthill *house, char *line, int explicit)
@@ -24,9 +36,10 @@ int		sc_room(t_parser *parse, char *line, int explicit)
 		fill_room(parse->house, line, explicit);
 	else if (is_valid_connection(line))
 	{
-		init_dijsktra(parse->house);
+		init_dijkstra(parse->house);
 		enter_scope(parse, SC_CONNECTION);
 		ret = parser(parse, line, explicit);
+		LIST_POP_BACK(&parse->house->saved);
 		if (ret == 2)
 			return (2);
 	}

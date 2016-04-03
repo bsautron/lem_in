@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_anthill.c                                     :+:      :+:    :+:   */
+/*   list_pop_back.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/03 19:50:42 by bsautron          #+#    #+#             */
-/*   Updated: 2016/04/03 19:50:50 by bsautron         ###   ########.fr       */
+/*   Created: 2016/04/03 21:50:52 by bsautron          #+#    #+#             */
+/*   Updated: 2016/04/03 21:58:28 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
-#include <libhash.h>
+#include <liblist.h>
 
-t_anthill	init_anthill(void)
+void	list_pop_back(t_plist **list)
 {
-	t_anthill	new;
+	t_plist		*tmp;
 
-	ft_bzero(&new, sizeof(t_anthill));
-	new.htab = HTAB_CREATE(100, &hash_pour_les_nuls);
-	new.roads = (t_roads *)malloc(sizeof(t_roads));
-	return (new);
+	tmp = *list;
+	if (tmp)
+	{
+		if (!tmp->next)
+			*list = NULL;
+		else
+		{
+			while (((t_plist *)(tmp->next))->next)
+				tmp = tmp->next;
+			tmp->next = NULL;
+		}
+	}
 }

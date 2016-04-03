@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/03 19:31:16 by bsautron          #+#    #+#             */
-/*   Updated: 2016/04/03 19:36:03 by bsautron         ###   ########.fr       */
+/*   Updated: 2016/04/03 21:56:45 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_plist	t_plist;
 # define LIST_MAP(X, F)			l_map((t_plist*)(X),(t_plist*(*)(t_plist*))(F))
 # define LIST_REMOVE(X, F)		l_rm((t_plist **)(X), (int (*)(t_plist *))(F))
 # define LIST_POP_FRONT(X)		list_pop_front((t_plist **)(X))
+# define LIST_POP_BACK(X)		list_pop_back((t_plist **)(X))
 # define LIST_COUNT(X)			list_count((t_plist *)(X))
 
 t_plist					*list_new(size_t size);
@@ -32,6 +33,7 @@ void					l_map(t_plist *lst, t_plist *(*fn)(t_plist *));
 void					l_rm(t_plist **list, int (*fn)(t_plist *));
 size_t					list_count(t_plist *list);
 void					list_pop_front(t_plist **start);
+void					list_pop_back(t_plist **start);
 
 struct					s_plist
 {

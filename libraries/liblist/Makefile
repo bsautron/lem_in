@@ -6,7 +6,7 @@
 #    By: bsautron <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/03 19:29:05 by bsautron          #+#    #+#              #
-#    Updated: 2016/04/03 19:38:12 by bsautron         ###   ########.fr        #
+#    Updated: 2016/04/03 21:56:19 by bsautron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SOURCES = list_new.c \
 					list_remove.c \
 					list_count.c \
 					list_pop_front.c \
+					list_pop_back.c \
 
 SOURCES_FOLDER = .
 
