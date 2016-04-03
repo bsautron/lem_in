@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit_scope.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/04/03 22:11:02 by bsautron          #+#    #+#             */
+/*   Updated: 2016/04/03 22:11:05 by bsautron         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <parser.h>
 
-void exit_scope(t_parser *parser)
+void	exit_scope(t_parser *parser)
 {
 	LIST_POP_FRONT(&parser->scope);
 }

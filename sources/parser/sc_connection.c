@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sc_connection.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/04/03 22:11:33 by bsautron          #+#    #+#             */
+/*   Updated: 2016/04/03 22:15:34 by bsautron         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <parser.h>
 
-static int connect_it(t_anthill *house, char *line, int explicit)
+static int	connect_it(t_anthill *house, char *line, int explicit)
 {
 	char	**infos;
 	int		ret;
@@ -13,9 +25,10 @@ static int connect_it(t_anthill *house, char *line, int explicit)
 	return (ret);
 }
 
-int		sc_connection(t_parser *parser, char *line, int explicit)
+int			sc_connection(t_parser *parser, char *line, int explicit)
 {
 	int		ret;
+
 	if (is_valid_connection(line))
 	{
 		ret = connect_it(parser->house, line, explicit);
