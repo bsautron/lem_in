@@ -6,7 +6,7 @@
 /*   By: bsautron <bsautron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/03 21:29:15 by bsautron          #+#    #+#             */
-/*   Updated: 2016/04/03 21:30:53 by bsautron         ###   ########.fr       */
+/*   Updated: 2016/04/03 22:02:51 by bsautron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,35 +94,7 @@ static void	devide_ants(t_anthill *house)
 	house->roads->nb_ants[0] += total_ants;
 }
 
-static void tab_list_to_tab_of_tab(t_anthill *house)
-{
-	int			i;
-	int			j;
-	t_list_int	*tmp;
-
-	house->roads->tab_roads =
-		(int **)malloc(sizeof(int *) * (house->roads->nb_roads + 1));
-	ft_bzero(house->roads->tab_roads, sizeof(int *) * house->roads->nb_roads);
-	house->roads->tab_roads[house->roads->nb_roads] = NULL;
-	i = 0;
-	while (i < house->roads->nb_roads)
-	{
-		house->roads->tab_roads[i] =
-			(int *)malloc(sizeof(int) * house->roads->nb_steps[i]);
-		j = 0;
-		tmp = house->roads->road[i];
-		tmp = tmp->next;
-		while (tmp)
-		{
-			house->roads->tab_roads[i][j] = tmp->nb;
-			tmp = tmp->next;
-			j++;
-		}
-		i++;
-	}
-}
-
-static void get_this_road(t_anthill *house, int i_room)
+static void	get_this_road(t_anthill *house, int i_room)
 {
 	int		i;
 	int		id;

@@ -129,5 +129,7 @@ int			move_ants(t_anthill *house);
 int			find_min_list_int(t_list_int *list);
 void		push_id(t_list_int **list, int id);
 int			remove_id(t_list_int **list, int id);
+void		tab_list_to_tab_of_tab(t_anthill *house);
+
 
 #endif

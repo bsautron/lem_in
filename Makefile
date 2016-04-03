@@ -28,6 +28,7 @@ SOURCES = create_room.c \
 			print_matrix.c \
 			get_roads.c \
 			move_ants.c \
+			tab_list_to_tab_of_tab.c \
 			\
 			helpers/find_min_list_int.c \
 			helpers/push_id.c \
